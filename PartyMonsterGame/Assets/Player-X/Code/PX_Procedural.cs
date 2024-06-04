@@ -157,13 +157,13 @@ namespace PlayerX
 	        }
 
 	        //... Walk with input
-			if(dependencies.inputs.key_Inputs != Vector2.zero)
+			if(dependencies.inputs.Frame.KeyInput != Vector2.zero)
 	        {
 	            walk = true;
 	        }
 			
 			//... Walk with step prediction
-	        else if(enableStepPrediction && offBalance && dependencies.inputs.key_Inputs == Vector2.zero && Vector3.Distance(centerMassPoint.position, 
+	        else if(enableStepPrediction && offBalance && dependencies.inputs.Frame.KeyInput == Vector2.zero && Vector3.Distance(centerMassPoint.position, 
 			new Vector3(centerCheckPoint.position.x, centerMassPoint.position.y, centerCheckPoint.position.z)) >= offBalanceLeanDistance)
 	        {
 	            walk = true;
@@ -196,7 +196,7 @@ namespace PlayerX
 			if(dependencies.controller.moveDir == Vector3.zero && dependencies.state.Grounded() && !dependencies.controller.jumping)
 			{
 				//... Increase step height and step duration to help push back balance
-				if(offBalance && !dependencies.inputs.keyRun_Input)
+				if(offBalance && !dependencies.inputs.Frame.RunHold)
 				{
 					if(centerMassPoint.localPosition.z > centerCheckPoint.localPosition.z)
 					{
@@ -211,7 +211,7 @@ namespace PlayerX
 					}
 				}
 				
-				if(!dependencies.inputs.keyRun_Input && !dependencies.controller.reaching && !dependencies.controller.kneeling && !dependencies.controller.punching)
+				if(!dependencies.inputs.Frame.RunHold && !dependencies.controller.reaching && !dependencies.controller.kneeling && !dependencies.controller.punching)
 				{
 					//... Correct slight of balance with tilting
 					if(Vector3.Distance(centerMassPoint.position, new Vector3(centerCheckPoint.position.x, centerMassPoint.position.y, centerCheckPoint.position.z)) >= offBalanceLeanDistance
@@ -370,7 +370,7 @@ namespace PlayerX
 				{
 					if(walk)
 					{
-						if(!dependencies.inputs.keyRun_Input)
+						if(!dependencies.inputs.Frame.RunHold)
 						{
 							//... Reset legs (Walk)
 							dependencies.player.legRightJoint.targetRotation = Quaternion.Slerp(dependencies.player.legRightJoint.targetRotation, legRightTarget.normalized * Quaternion.Euler(-20f, 0f, -10f), 8f * Time.fixedDeltaTime);
@@ -421,7 +421,7 @@ namespace PlayerX
 				{
 					if(walk)
 					{
-						if(!dependencies.inputs.keyRun_Input)
+						if(!dependencies.inputs.Frame.RunHold)
 						{
 							//... Reset legs (Walk)
 							dependencies.player.legLeftJoint.targetRotation = Quaternion.Slerp(dependencies.player.legLeftJoint.targetRotation, legLeftTarget.normalized * Quaternion.Euler(-20f, 0f, 10f), 8f * Time.fixedDeltaTime);
@@ -447,7 +447,7 @@ namespace PlayerX
 			if(walk)
 			{
 				//... Run pose
-				if(dependencies.inputs.keyRun_Input)
+				if(dependencies.inputs.Frame.RunHold)
 				{
 					stoppedRunning = false;
 					
@@ -487,7 +487,7 @@ namespace PlayerX
 					}
 				}
 				
-				if(!dependencies.inputs.keyRun_Input && !stoppedRunning)
+				if(!dependencies.inputs.Frame.RunHold && !stoppedRunning)
 				{
 					stoppedRunning = true;
 					

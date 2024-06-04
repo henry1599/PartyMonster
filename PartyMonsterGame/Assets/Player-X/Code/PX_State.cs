@@ -273,13 +273,13 @@ namespace PlayerX
 				if(springRamp < rootSpringRecord)
 				{
 					//... Recover speed ramp if IS knocked out and NO input
-					if(isKnockedOut && dependencies.inputs.key_Inputs == Vector2.zero)
+					if(isKnockedOut && dependencies.inputs.Frame.KeyInput == Vector2.zero)
 					{
 						springRamp += Mathf.Lerp(0f, recoverySpeed * 1000f, 1f * Time.fixedDeltaTime);
 					}
 					
 					//... Recover speed ramp if NOT knocked out and NO input
-					else if(!isKnockedOut && dependencies.inputs.key_Inputs == Vector2.zero)
+					else if(!isKnockedOut && dependencies.inputs.Frame.KeyInput == Vector2.zero)
 					{
 						springRamp += Mathf.Lerp(0f, balanceRecoverySpeed / 3 * 1000f, 1f * Time.fixedDeltaTime);
 					}

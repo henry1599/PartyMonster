@@ -227,8 +227,8 @@ namespace PlayerX
 			//... Direction based on camera angle
 			if(dependencies.playerCamera.cameraRotation && !dependencies.inputs.simpleAI)
 			{
-				moveDir = (dependencies.playerCamera.followCamera.transform.forward * dependencies.inputs.key_Inputs.y 
-				+ dependencies.playerCamera.followCamera.transform.right * dependencies.inputs.key_Inputs.x);
+				moveDir = (dependencies.playerCamera.followCamera.transform.forward * dependencies.inputs.Frame.KeyInput.y 
+				+ dependencies.playerCamera.followCamera.transform.right * dependencies.inputs.Frame.KeyInput.x);
 				
 				moveDir.y = 0f;
 				moveDir = moveDir.normalized;
@@ -237,7 +237,7 @@ namespace PlayerX
 			//... Direction based on world
 			else if(!dependencies.inputs.simpleAI)
 			{
-				moveDir = Vector3.forward * -dependencies.playerCamera.offset * dependencies.inputs.key_Inputs.y + Vector3.right * -dependencies.playerCamera.offset * dependencies.inputs.key_Inputs.x;
+				moveDir = Vector3.forward * -dependencies.playerCamera.offset * dependencies.inputs.Frame.KeyInput.y + Vector3.right * -dependencies.playerCamera.offset * dependencies.inputs.Frame.KeyInput.x;
 				moveDir.y = 0f;
 				moveDir = moveDir.normalized;
 			}
@@ -288,7 +288,7 @@ namespace PlayerX
 						
 						
 						//... Apply move velocity
-						if(!dependencies.inputs.keyRun_Input && dependencies.state.Grounded() && moveDir != Vector3.zero)
+						if(!dependencies.inputs.Frame.RunHold && dependencies.state.Grounded() && moveDir != Vector3.zero)
 						{
 							if(running)
 							{
@@ -320,7 +320,7 @@ namespace PlayerX
 						}
 						
 						//... Apply run velocity
-						else if(dependencies.inputs.keyRun_Input && dependencies.state.Grounded() && moveDir != Vector3.zero)
+						else if(dependencies.inputs.Frame.RunHold && dependencies.state.Grounded() && moveDir != Vector3.zero)
 						{
 							running = true;
 							
@@ -331,7 +331,7 @@ namespace PlayerX
 							dependencies.procedural.stepHeight = dependencies.procedural.stepHeightRecord * 3f;
 						}
 						
-						else if(!dependencies.inputs.keyRun_Input && running)
+						else if(!dependencies.inputs.Frame.RunHold && running)
 						{
 							running = false;
 						}
@@ -360,7 +360,7 @@ namespace PlayerX
 						
 						
 						//... Apply move velocity
-						if(!dependencies.inputs.keyRun_Input && dependencies.state.Grounded() && moveDir != Vector3.zero)
+						if(!dependencies.inputs.Frame.RunHold && dependencies.state.Grounded() && moveDir != Vector3.zero)
 						{
 							if(running)
 							{
@@ -392,7 +392,7 @@ namespace PlayerX
 						}
 						
 						//... Apply run velocity
-						else if(dependencies.inputs.keyRun_Input && dependencies.state.Grounded() && moveDir != Vector3.zero)
+						else if(dependencies.inputs.Frame.RunHold && dependencies.state.Grounded() && moveDir != Vector3.zero)
 						{
 							running = true;
 							
@@ -403,7 +403,7 @@ namespace PlayerX
 							dependencies.procedural.stepHeight = dependencies.procedural.stepHeightRecord * 3f;
 						}
 						
-						else if(!dependencies.inputs.keyRun_Input && running)
+						else if(!dependencies.inputs.Frame.RunHold && running)
 						{
 							running = false;
 						}
@@ -504,7 +504,7 @@ namespace PlayerX
 				//... Jump if grounded
 				if(dependencies.state.Grounded())
 				{
-					if(dependencies.inputs.keyJump_Input && !jumping)
+					if(dependencies.inputs.Frame.JumpDown && !jumping)
 					{
 						jumping = true;
 						jumped = true;
