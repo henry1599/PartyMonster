@@ -33,7 +33,7 @@ namespace PlayerX
 			if(noInputMotion)
 			{
 				//... Slow motion when there is no input
-				if(dependencies.controller.moveDir != Vector3.zero || dependencies.inputs.mouseLeft_input || dependencies.inputs.mouseRight_input || dependencies.controller.jumping || dependencies.inputs.keyKickLeft_Input || dependencies.inputs.keyKickRight_Input || dependencies.inputs.keyPunchLeft_Input || dependencies.inputs.keyPunchRight_Input)
+				if(dependencies.controller.moveDir != Vector3.zero || dependencies.inputs.mouseLeft_input || dependencies.inputs.mouseRight_input || dependencies.controller.jumping || dependencies.inputs.keyKickLeft_Input || dependencies.inputs.keyKickRight_Input || dependencies.inputs.Punch.PunchingLeft || dependencies.inputs.Punch.PunchingRight)
 				{
 					if(Time.timeScale != 1)
 					{

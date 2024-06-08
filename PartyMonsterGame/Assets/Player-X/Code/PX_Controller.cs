@@ -962,7 +962,7 @@ namespace PlayerX
 			if(enablePunch)
 			{
 				//... Punch left
-				if(dependencies.inputs.keyPunchLeft_Input)
+				if(dependencies.inputs.Punch.PunchingLeft)
 				{
 					if(dependencies.player.armLeftJoint.connectedBody != null && dependencies.player.handLeftJoint.connectedBody != null && !dependencies.weapons.shootingLeft)
 					{
@@ -989,7 +989,7 @@ namespace PlayerX
 					}
 				}
 				
-				if(punchingLeft && !dependencies.inputs.keyPunchLeft_Input)
+				if(punchingLeft && !dependencies.inputs.Punch.PunchingLeft)
 				{
 					punchingLeft = false;
 					
@@ -1026,13 +1026,14 @@ namespace PlayerX
 					}
 					
 					//... Restore joint drive
-					Invoke(nameof(ResetPunchLeft), 0.2f);
+					// Invoke(nameof(ResetPunchLeft), Time.deltaTime);
+					ResetPunchLeft();
 				}
 				
 				
 				
 				//... Punch right
-				if(dependencies.inputs.keyPunchRight_Input)
+				if(dependencies.inputs.Punch.PunchingRight)
 				{
 					if(dependencies.player.armRightJoint.connectedBody != null && dependencies.player.handRightJoint.connectedBody != null && !dependencies.weapons.shootingRight)
 					{
@@ -1059,7 +1060,7 @@ namespace PlayerX
 					}
 				}
 				
-				if(punchingRight && !dependencies.inputs.keyPunchRight_Input)
+				if(punchingRight && !dependencies.inputs.Punch.PunchingRight)
 				{
 					punchingRight = false;
 					
@@ -1095,7 +1096,8 @@ namespace PlayerX
 					}
 					
 					//... Restore joint drive
-					Invoke(nameof(ResetPunchRight), 0.2f);
+					// Invoke(nameof(ResetPunchRight), Time.deltaTime);
+					ResetPunchRight();
 				}
 			}
 	    }
@@ -1105,20 +1107,22 @@ namespace PlayerX
 		//... Reset Punch ...
 		void ResetPunchLeft()
 		{
-			if(!dependencies.inputs.keyPunchLeft_Input)
+			if(!dependencies.inputs.Punch.PunchingLeft)
 			{
 				dependencies.player.armLeftJoint.slerpDrive = dependencies.player.armLeftJointDrive;
 				dependencies.player.handLeftJoint.slerpDrive = dependencies.player.handLeftJointDrive;
+				dependencies.inputs.Punch.UpdatePunchIndex();
 			}
 		}
 		
 		
 		void ResetPunchRight()
 		{
-			if(!dependencies.inputs.keyPunchRight_Input)
+			if(!dependencies.inputs.Punch.PunchingRight)
 			{
 				dependencies.player.armRightJoint.slerpDrive = dependencies.player.armRightJointDrive;
 				dependencies.player.handRightJoint.slerpDrive = dependencies.player.handRightJointDrive;
+				dependencies.inputs.Punch.UpdatePunchIndex();
 			}
 		}
 		

@@ -41,14 +41,13 @@ namespace PlayerX
 		public bool 
 		mouseLeft_input, mouseRight_input,
 		keyLook_Input, keyKneel_Input, 
-		keyPunchRight_Input, keyPunchLeft_Input, 
 		keyKickRight_Input, keyKickLeft_Input,
 		keyEquipLeft_Input, keyEquipRight_Input,
 		velocityModeChange_Input,
 		slowMotion_Input,
 		restart_Input,
 		exit_Input;
-
+		public PunchParam Punch {get => this.punch;} private PunchParam punch = new PunchParam(false, false, 0);
 		[ReadOnly] protected FrameInput frameInput; 
 		public FrameInput Frame => this.frameInput;
 		
@@ -61,6 +60,7 @@ namespace PlayerX
 	    void Update()
 	    {
 			this.frameInput = GatherInput();
+			
 			//... Human Input
 			//-
 			
@@ -73,19 +73,11 @@ namespace PlayerX
 			// 	//... Mouse output
 			// 	mouse_Inputs = Mouse.current.delta.ReadValue();
 				
-			// 	//... Key inputs
-			// 	keyLeft_Input = Keyboard.current.aKey.isPressed;
-			// 	keyRight_Input = Keyboard.current.dKey.isPressed;
-			// 	keyForward_Input = Keyboard.current.wKey.isPressed;
-			// 	keyBackward_Input = Keyboard.current.sKey.isPressed;
-				
-			// 	keyJump_Input = Keyboard.current.spaceKey.wasPressedThisFrame;
-			// 	keyRun_Input = Keyboard.current.leftShiftKey.isPressed;
 			// 	keyLook_Input = Keyboard.current.fKey.isPressed;
 			// 	keyKneel_Input = Keyboard.current.leftCtrlKey.isPressed;
 				
-			// 	keyPunchLeft_Input = Keyboard.current.qKey.isPressed;
-			// 	keyPunchRight_Input = Keyboard.current.eKey.isPressed;
+				// this.punch.PunchingLeft = Keyboard.current.qKey.isPressed;
+				// this.punch.PunchingRight = Keyboard.current.eKey.isPressed;
 			// 	keyKickLeft_Input = Keyboard.current.zKey.isPressed;
 			// 	keyKickRight_Input = Keyboard.current.cKey.isPressed;
 				
@@ -227,27 +219,30 @@ namespace PlayerX
 
         public FrameInput GatherInput()
         {
-			return new FrameInput()
+			FrameInput result = new FrameInput()
 			{
 				KeyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
 				JumpDown = Input.GetKeyDown(KeyCode.Space),
-				AttackDown = Input.GetMouseButtonDown(0),
+				AttackDown = Input.GetMouseButton(0),
 				RunHold = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)
 			};
+
+			this.punch.SetCurrentPunch(result.AttackDown);
+			return result; 
         }
 		
 		//... Simple AI Functions
 		//... AI Release left punch
 		void PunchLeft()
 		{
-			keyPunchLeft_Input = false;
+			this.punch.PunchingLeft = false;
 			Invoke(nameof(actionCoolDown), actionTime);
 		}
 		
 		//... AI Release right punch
 		void PunchRight()
 		{
-			keyPunchRight_Input = false;
+			this.punch.PunchingRight = false;
 			Invoke(nameof(actionCoolDown), actionTime);
 		}
 		
@@ -301,6 +296,47 @@ namespace PlayerX
 		void actionCoolDown()
 		{
 			actionPerform = false;
+		}
+		[System.Serializable]
+		public class PunchParam
+		{
+			public bool PunchingLeft;
+			public bool PunchingRight;
+			public int CurrentPunchIndex;
+			public PunchParam(bool punchingLeft, bool punchingRight, int initIndex)
+			{
+				this.PunchingLeft = punchingLeft;
+				this.PunchingRight = punchingRight;
+				this.CurrentPunchIndex = initIndex;
+			}
+			public bool GetCurrentPunch() => this[this.CurrentPunchIndex];
+			public void SetCurrentPunch(bool isPunching) => this[this.CurrentPunchIndex] = isPunching;
+			public void UpdatePunchIndex()
+			{
+				++ this.CurrentPunchIndex;
+				this.CurrentPunchIndex %= 2;
+			}
+			public bool this[int i]
+			{
+				get => i switch
+				{
+					0 => this.PunchingLeft,
+					1 => this.PunchingRight,
+					_ => false
+				};
+				set
+				{
+					switch (i)
+					{
+						case 0:
+							this.PunchingLeft = value;
+							break;
+						case 1:
+							this.PunchingRight = value;
+							break;
+					}
+				}
+			}
 		}
     }
 }
