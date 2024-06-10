@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Properties;
 using UnityEngine;
 
 namespace HenryDev.Utilities
@@ -17,6 +18,18 @@ namespace HenryDev.Utilities
             {
                 Object.Destroy(transform.GetChild(i).gameObject);
             }
+        }
+        public static T SafeAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            var comp = gameObject.GetComponent<T>();
+            if (comp != null)
+                return comp;
+            comp = gameObject.AddComponent<T>();
+            return comp;
+        }
+        public static T SafeAddComponent<T>(this Transform transform) where T : Component
+        {
+            return transform.gameObject.SafeAddComponent<T>();
         }
     }
     public static class ObjectExt

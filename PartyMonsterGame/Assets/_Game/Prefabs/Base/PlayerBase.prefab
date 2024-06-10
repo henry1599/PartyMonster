@@ -881,6 +881,7 @@ GameObject:
   - component: {fileID: 5447899565270342639}
   - component: {fileID: 6215382078417563501}
   - component: {fileID: 4823904723071678107}
+  - component: {fileID: 1865481027992255912}
   m_Layer: 9
   m_Name: Equip_Right
   m_TagString: Untagged
@@ -1004,6 +1005,22 @@ MonoBehaviour:
   attackPoint: {fileID: 0}
   weaponAudioSource: {fileID: 0}
   attackSounds: []
+--- !u!114 &1865481027992255912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583514007967204752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc0ca083070e5834db6b391ed4d514ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dependencies: {fileID: 0}
+  hand: 1
+  weapon: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!1 &593483692771686635
 GameObject:
   m_ObjectHideFlags: 0
@@ -3554,6 +3571,7 @@ GameObject:
   - component: {fileID: 5206193598238599512}
   - component: {fileID: 1281866559650505152}
   - component: {fileID: 6992087456358936942}
+  - component: {fileID: 1360971233012740880}
   m_Layer: 9
   m_Name: Equip_Left
   m_TagString: Untagged
@@ -3677,6 +3695,22 @@ MonoBehaviour:
   attackPoint: {fileID: 0}
   weaponAudioSource: {fileID: 0}
   attackSounds: []
+--- !u!114 &1360971233012740880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2360210616795476428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc0ca083070e5834db6b391ed4d514ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dependencies: {fileID: 0}
+  hand: 0
+  weapon: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!1 &2372007844794913689
 GameObject:
   m_ObjectHideFlags: 0
@@ -4184,6 +4218,7 @@ GameObject:
   - component: {fileID: 6401924310457245561}
   - component: {fileID: 7065731009836411410}
   - component: {fileID: 9088918305826737569}
+  - component: {fileID: 4337277812568616004}
   m_Layer: 9
   m_Name: PlayerBase
   m_TagString: Untagged
@@ -4228,6 +4263,7 @@ MonoBehaviour:
   health: {fileID: 896690194997352719}
   dismember: {fileID: 6242208137334261329}
   weapons: {fileID: 7952225714266286850}
+  weaponHandler: {fileID: 4337277812568616004}
   outOfBound: {fileID: 6401924310457245561}
   sound: {fileID: 7065731009836411410}
 --- !u!114 &2524725607354157573
@@ -4276,8 +4312,6 @@ MonoBehaviour:
   mouseRight_input: 0
   keyLook_Input: 0
   keyKneel_Input: 0
-  keyPunchRight_Input: 0
-  keyPunchLeft_Input: 0
   keyKickRight_Input: 0
   keyKickLeft_Input: 0
   keyEquipLeft_Input: 0
@@ -4681,6 +4715,23 @@ MonoBehaviour:
   dependencies: {fileID: 4983294896666191447}
   slowMotionSpeed: 0.3
   noInputMotion: 0
+--- !u!114 &4337277812568616004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2692534349742981959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87fdc7ccf4e831c49b97e9af210d7a10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dependencies: {fileID: 0}
+  castRange: 3
+  castPivot: {fileID: 264673272529882057}
+  rightHandHolder: {fileID: 1865481027992255912}
+  leftHandHolder: {fileID: 1360971233012740880}
 --- !u!1 &2720319241241118314
 GameObject:
   m_ObjectHideFlags: 0

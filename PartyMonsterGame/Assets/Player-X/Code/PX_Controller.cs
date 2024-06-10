@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using PlayerX;
+using PartyMonster;
 
 namespace PlayerX
 {
@@ -978,7 +979,7 @@ namespace PlayerX
 						}
 						
 						//... Ramp punch force to allow soft or hard punches
-						punchLeftRamp = Mathf.Lerp(punchLeftRamp, dependencies.weapons.equipLeft.attackForce * 100f, 2.5f * Time.fixedDeltaTime);
+						punchLeftRamp = Mathf.Lerp(punchLeftRamp, dependencies.weaponHandler.LeftHandHolder.AttackForce * 100f, 2.5f * Time.fixedDeltaTime);
 						
 						//... Twist body
 						dependencies.player.bodyUpperJoint.targetRotation = Quaternion.Slerp(dependencies.player.bodyUpperJoint.targetRotation, Quaternion.Euler(0f, 30f, 0f), 20 * Time.fixedDeltaTime);
@@ -1001,17 +1002,17 @@ namespace PlayerX
 					//... Aim if target assigned
 					if(headTracking)
 					{
-						var punchDir = (trackObject.position - dependencies.weapons.equipLeft.attackPoint.position).normalized;
+						var punchDir = (trackObject.position - dependencies.weaponHandler.LeftHandHolder.AttackPoint.position).normalized;
 								
 						//... Left hand punch force in target direction
-						dependencies.weapons.equipLeft.weaponPhysics.AddForceAtPosition(punchDir * punchLeftRamp, dependencies.weapons.equipLeft.attackPoint.position, ForceMode.Impulse);
+						dependencies.weaponHandler.LeftHandHolder.Rb.AddForceAtPosition(punchDir * punchLeftRamp, dependencies.weaponHandler.LeftHandHolder.AttackPoint.position, ForceMode.Impulse);
 					}
 					
 					//... Punch forward
 					else
 					{
 						//... Left hand punch force forward direction
-						dependencies.weapons.equipLeft.weaponPhysics.AddForceAtPosition(dependencies.player.rootPhysics.transform.forward * punchLeftRamp, dependencies.weapons.equipLeft.attackPoint.position, ForceMode.Impulse);
+						dependencies.weaponHandler.LeftHandHolder.Rb.AddForceAtPosition(dependencies.player.rootPhysics.transform.forward * punchLeftRamp, dependencies.weaponHandler.LeftHandHolder.AttackPoint.position, ForceMode.Impulse);
 					}
 					
 					punching = false;
@@ -1049,7 +1050,7 @@ namespace PlayerX
 						}
 						
 						//... Ramp punch force to allow soft or hard punches
-						punchRightRamp = Mathf.Lerp(punchRightRamp, dependencies.weapons.equipRight.attackForce * 100f, 2.5f * Time.fixedDeltaTime);
+						punchRightRamp = Mathf.Lerp(punchRightRamp, dependencies.weaponHandler.RightHandHolder.AttackForce * 100f, 2.5f * Time.fixedDeltaTime);
 						
 						//... Twist body
 						dependencies.player.bodyUpperJoint.targetRotation = Quaternion.Slerp(dependencies.player.bodyUpperJoint.targetRotation, Quaternion.Euler(0f, -30f, 0f), 20 * Time.fixedDeltaTime);
@@ -1071,17 +1072,17 @@ namespace PlayerX
 					//... Aim if target assigned
 					if(headTracking)
 					{
-						var punchDir = (trackObject.position - dependencies.weapons.equipRight.attackPoint.position).normalized;
+						var punchDir = (trackObject.position - dependencies.weaponHandler.RightHandHolder.AttackPoint.position).normalized;
 								
 						//... Right hand punch force target direction
-						dependencies.weapons.equipRight.weaponPhysics.AddForceAtPosition(punchDir * punchRightRamp, dependencies.weapons.equipRight.attackPoint.position, ForceMode.Impulse);
+						dependencies.weapons.equipRight.weaponPhysics.AddForceAtPosition(punchDir * punchRightRamp, dependencies.weaponHandler.RightHandHolder.AttackPoint.position, ForceMode.Impulse);
 					}
 							
 					//... Punch forward
 					else
 					{
 						//... Right hand punch force forward direction
-						dependencies.weapons.equipRight.weaponPhysics.AddForceAtPosition(dependencies.player.rootPhysics.transform.forward * punchRightRamp, dependencies.weapons.equipRight.attackPoint.position, ForceMode.Impulse);
+						dependencies.weaponHandler.RightHandHolder.Rb.AddForceAtPosition(dependencies.player.rootPhysics.transform.forward * punchRightRamp, dependencies.weaponHandler.RightHandHolder.AttackPoint.position, ForceMode.Impulse);
 					}
 					
 					punching = false;

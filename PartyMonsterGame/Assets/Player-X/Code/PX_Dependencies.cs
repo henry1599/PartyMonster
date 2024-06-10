@@ -9,6 +9,7 @@
 
 using UnityEngine;
 using PlayerX;
+using PartyMonster;
 
 namespace PlayerX
 {
@@ -27,6 +28,7 @@ namespace PlayerX
 		public PX_Health health;
 		public PX_Dismemberment dismember;
 		public PX_Weapons weapons;
+		public PlayerWeaponHandler weaponHandler;
 		public PX_OutOfBounds outOfBound;
 		public PX_Sound sound;
 	}

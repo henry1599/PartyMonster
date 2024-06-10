@@ -10,5 +10,6 @@ namespace PartyMonster
         public bool JumpDown;
         public bool AttackDown;
         public bool RunHold;
+        public bool PickupDown;
     }
 }

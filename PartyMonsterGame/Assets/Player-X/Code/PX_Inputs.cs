@@ -222,9 +222,10 @@ namespace PlayerX
 			FrameInput result = new FrameInput()
 			{
 				KeyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
-				JumpDown = Input.GetKeyDown(KeyCode.Space),
-				AttackDown = Input.GetMouseButton(0),
-				RunHold = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)
+				JumpDown = Input.GetKeyDown(KeyCode.X),
+				AttackDown = Input.GetKey(KeyCode.C),
+				RunHold = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift),
+				PickupDown = Input.GetKeyDown(KeyCode.F)
 			};
 
 			this.punch.SetCurrentPunch(result.AttackDown);
